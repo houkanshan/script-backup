@@ -6,4 +6,4 @@
 
 #echo "change ready"
 
-xmodmap ./.Xmodmap
+xmodmap ~/bak/.Xmodmap

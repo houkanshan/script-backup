@@ -8,6 +8,7 @@ call vundle#rc()
 
 " let Vundle manage Vundle
 " required! 
+Bundle 'othree/html5.vim'
 Bundle 'gmarik/vundle'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'scrooloose/nerdcommenter'
@@ -44,7 +45,8 @@ let mapleader = ","
 let g:mapleader = ","
 
 colorscheme molokai
-let g:molokai_original = 0
+hi Normal ctermfg=NONE ctermbg=NONE cterm=NONE
+"let g:molokai_original = 0
 set t_Co=256
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -92,6 +94,8 @@ set tw=500
 set ai
 set si
 set wrap
+
+set nowritebackup
 
 """"""""""""""""""""""""""""""
 " => Statusline
@@ -207,6 +211,7 @@ let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
 " Set minimum syntax keyword length.
 let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_auto_completion_start_length = 2
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 let g:neocomplcache_skipinputtime = '0.5'
 let g:neocomplcache_max_list = 20
@@ -218,6 +223,8 @@ if !(exists('g:neocomplcache_same_filetype_lists'))
    let g:neocomplcache_same_filetype_lists = {}
 endif
 let g:neocomplcache_same_filetype_lists.less = 'css'
+let g:neocomplcache_same_filetype_lists.scss = 'css'
+let g:neocomplcache_same_filetype_lists.sass = 'css'
 
 
 "" omni completion
@@ -227,3 +234,24 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" set html, js, css 2 space"
+autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.less,*.scss  set tabstop=2 shiftwidth=2
+
+" learn from kk"
+inoremap jk <esc>
+inoremap kj <esc>
+
+" learn from henix"
+imap <esc><bs> <esc>vbda
+
+
+"sudo write"
+comm! W exec 'w !sudo tee % > /dev/null' | e!
+
+"set for python"
+autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+"trim
+autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
+
+
